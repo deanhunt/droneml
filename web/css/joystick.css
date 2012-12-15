@@ -50,14 +50,24 @@ aside.highlight {
     right: 0;
 }
 
-.y-controls {
-    position: absolute;
+.x-controls [data-command="counterclockwise"] {
     top: 0;
     left: 0;
+}
+
+.x-controls [data-command="clockwise"] {
+    top: 0;
+    right: 0;
+}
+
+.y-controls {
+    position: absolute;
+    top: -10px;
+    right: 40px;
     width: 80px;
     height: 160px;
     border-radius: 200px;
-    -webkit-transform: translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateZ(2deg);
+    -webkit-transform: translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateZ(0deg);
 }
 
 .y-controls [data-command="up"] {
@@ -68,3 +78,23 @@ aside.highlight {
     left: 50%;
     bottom: 0;
 }
+
+.flight-controls {
+    position: absolute;
+    bottom: 130px;
+    right: -90px;
+    width: 160px;
+    height: 80px;
+    border-radius: 200px;
+    -webkit-transform: translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateZ(0deg);
+}
+
+.flight-controls [data-command="take-off"] {
+    left: 0;
+}
+
+.flight-controls [data-command="land"] {
+    right: 0;
+}
+
+

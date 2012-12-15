@@ -9,7 +9,7 @@ StaffLine = Backbone.View.extend({
 
     render: function(){
         // Render the first few measures.
-        for (var i = 0; i < 14; i++){
+        for (var i = 0; i < StaffLine.MEASURES; i++){
             this.addMeasure();
         }
 
@@ -72,7 +72,7 @@ StaffLine = Backbone.View.extend({
             }, this).join('');
             lines.push(rowInfo);
         }, this);
-        var results = lines.join('↵');
+        var results = lines.join(StaffLine.LINE_BREAK);
         return results;
     },
 
@@ -165,19 +165,21 @@ StaffLine = Backbone.View.extend({
     }
 });
 
+StaffLine.MEASURES = 14;
+
 StaffLine.SPACER = '·';
 
-StaffLine.DICTIONARY = {
-    "Take off" : "➚",
-    "Land": "↘",
+StaffLine.LINE_BREAK = '//';
 
+StaffLine.DICTIONARY = {
+    "take-off" : "➚",
+    "land": "↘",
     "up": "△",
     "down" : "▽",
     'forward': "↑",
     'backward': "↓",
-    "left": "↰", // Should have a better icon, straffing.
-    "right": "↱", // Should have a better icon, straffing.
-
-    "Clockwise rotation": "↻",
-    "Counterclockwise rotation": "↺"
+    "left": "←",
+    "right": "→",
+    "clockwise": "↻",
+    "counterclockwise": "↺"
 };
