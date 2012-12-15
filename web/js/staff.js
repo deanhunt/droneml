@@ -67,8 +67,7 @@ Staff = Backbone.View.extend({
             lines.push(rowInfo);
         }, this);
         return lines.join('\n');
-    },
-
+    }
 });
 
 Staff.dictionary = {
@@ -78,8 +77,8 @@ Staff.dictionary = {
     "Down" : "▽",
     "Forward": "↑",
     "Backward": "↓",
-    "Turn left": "↰",
-    "Turn right": "↱",
+    "Strafe Left": "↰", // Should have a better icon, straffing.
+    "Strafe Right": "↱", // Should have a better icon, straffing.
     "Clockwise rotation": "↻",
     "Counterclockwise rotation": "↺"
 };
@@ -91,8 +90,8 @@ Staff.movements = [
     "Down",
     "Forward",
     "Backward",
-    "Turn left",
-    "Turn right",
+    "Strafe Left",
+    "Strafe Right",
     "Clockwise rotation",
     "Counterclockwise rotation"
 ];
