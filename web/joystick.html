@@ -21,10 +21,10 @@
 
     <script>
         $(document).ready(function() {
-            var staffLine = new StaffLine({el: $('#staff')});
+            window.staffLine = new StaffLine({el: $('#staff')});
             staffLine.render();
 
-            var joystick = new Joystick({
+            window.joystick = new Joystick({
                 el: document.body,
                 staff: staffLine
             });
@@ -43,7 +43,11 @@
 </script>
 
 <div id="staff">
-
+    <div id="measures"></div>
+    <aside id="staff-url">
+        <input class="url"></input>
+        <button id="play-button">Play &gt;</button>
+    </aside>
 </div>
 
 <div id="joystick-composer">
