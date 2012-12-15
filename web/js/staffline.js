@@ -53,6 +53,9 @@ StaffLine = Backbone.View.extend({
     },
 
     updateOuputs_: function(){
+        // TODO(dean): Temporarily removed social behavior.
+        return;
+
         var url = this.toURL();
 
         var input = this.el.querySelector('.url');
@@ -169,7 +172,7 @@ StaffLine.MEASURES = 14;
 
 StaffLine.SPACER = '·';
 
-StaffLine.LINE_BREAK = '//';
+StaffLine.LINE_BREAK = '|';
 
 StaffLine.DICTIONARY = {
     "take-off" : "➚",

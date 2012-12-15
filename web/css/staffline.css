@@ -1,10 +1,16 @@
 #staff {
     font-size: 36pt;
     -webkit-user-select: none;
+    text-align: center;
+}
+
+// HACK(dean): Temporarily removing our social strategy.
+#staff-url, .tweetButton {
+    display: none !important;
 }
 
 #staff-url {
-
+    display: inline-block;
 }
 
 #staff-url .url {

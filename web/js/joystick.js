@@ -1,7 +1,8 @@
 Joystick = Backbone.View.extend({
     events: {
-        'keydown'   : 'keydownEvent_',
-        'mousedown' : 'addEvent_'
+        'keydown'                       : 'keydownEvent_',
+        'mousedown aside[data-command]' : 'addEvent_',
+        'mousedown .begin-flight'       : 'fly'
     },
 
     initialize: function(options){
@@ -24,6 +25,28 @@ Joystick = Backbone.View.extend({
         }, 200);
 
         this.staff_.push(command);
+    },
+
+    fly: function(){
+        var string = this.staff_.toString();
+
+        jQuery.ajax({
+            type: 'POST',
+            url: 'debug',
+            data: {
+                droneML: encodeURI(string)
+            },
+            success: function(data){
+                console.log('success!', data);
+            },
+            dataType: 'json'
+        });
+
+        // jQuery.post('debug/', {
+        //     code: string
+        // }, function(result){
+        //     console.log('success!');
+        // });
     },
 
     addEvent_: function(evt){
