@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>DroneML Composer</title>
+    <!-- Bootstrap -->
+     <link href="css/joystick.css" rel="stylesheet" media="screen">
+     <link href="css/staffline.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js'></script>
+
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/backbone.js"></script>
+    <script src="js/joystick.js"></script>
+    <script src="js/staffline.js"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/black-tie/jquery-ui.css" type="text/css" />
+
+    <script>
+        $(document).ready(function() {
+            var staffLine = new StaffLine({el: $('#staff')});
+            staffLine.render();
+
+            var joystick = new Joystick({
+                el: document.body,
+                staff: staffLine
+            });
+        });
+    </script>
+</head>
+<body>
+
+<script type="text/template" id="measure-tmpl">
+    <div class="measure">
+        <b></b>
+        <b></b>
+        <b></b>
+        <b></b>
+    </div>
+</script>
+
+<div id="staff">
+
+</div>
+
+<div id="joystick-composer">
+    <div class="x-controls">
+        <aside data-command="forward">↑</aside>
+        <aside data-command="backward">↓</aside>
+        <aside data-command="left">↰</aside>
+        <aside data-command="right">↱</aside>
+    </div>
+    <div class="y-controls">
+        <aside data-command="up">△</aside>
+        <aside data-command="down">▽</aside>
+    </div>
+</div>
+
+<footer>Made by Patrick Ewing, Dean Hunt and Olof Mathé during <a href="http://arthackday.net/gaffta">Art Hack Day SF 2012</a></footer>
+</body>
+</html>

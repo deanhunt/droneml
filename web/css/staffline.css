@@ -1,0 +1,21 @@
+#staff {
+    font-size: 36pt;
+    -webkit-user-select: none;
+}
+
+.measure {
+    width: 1em;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.measure b {
+    display: block;
+    height: 1em;
+    width: 1em;
+    border-bottom: 2px solid #eee
+}
+
+.measure b.cursor {
+    background-color: red;
+}
