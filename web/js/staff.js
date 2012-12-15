@@ -30,6 +30,15 @@ Staff = Backbone.View.extend({
         }, this);
     },
 
+    redrawTweetButton: function(){
+        $('.postFlightTwitterButton').remove();
+       var tweet = this.toString('↵');
+       var postFlightTwitterButton = "<a class='postFlightTwitterButton' href='https://twitter.com/intent/tweet?original_referer=http%3A%2F%2FdroneML.com%2F&text=Check out my new flight path&tw_p=tweetbutton&url=http%3A%2F%2FdroneML.com%2F"+tweet+"&via=arthackday'>Tweet your flight path</a>";
+//        var tweetButton = '<a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Farthackday.net%2Fgaffta%2F&text='+test+'&tw_p=tweetbutton&url=http%3A%2F%droneML.com%2F&via=arthackday" data-count="vertical" class="twitter-share-button" data-via="arthackday" target="_blank" data-text="▽" data-lang="en">Tweet your flight path</a>';
+        $('.tweetButton').append(postFlightTwitterButton);
+    },
+
+
     fly: function(){
         var tweet = this.toString();
         document.getElementById('preview').innerHTML = tweet;
@@ -37,14 +46,20 @@ Staff = Backbone.View.extend({
         //also launch a function to calculate the output of all rows.
         //get data from it
         var flightPath = $('form').serialize();
+        
         console.log(flightPath);
-
+       
+        $('#preFlightTwitterButton').remove();
+        this.redrawTweetButton();
+        //this.updateTweetText();
         $.post("patrick.php", flightPath, function(data,status){
             alert("Data: " + flightPath + "\nStatus: " + status);
         });
     },
 
-    toString: function(){
+    toString: function(newline){
+        newline = newline || '\n'; 
+
         var lines = [];
         var rows = document.querySelectorAll('.line');
         Array.prototype.slice.apply(rows).forEach(function(row){
@@ -66,7 +81,7 @@ Staff = Backbone.View.extend({
 
             lines.push(rowInfo);
         }, this);
-        return lines.join('\n');
+        return lines.join(newline);
     }
 });
 
