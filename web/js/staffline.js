@@ -9,7 +9,7 @@ StaffLine = Backbone.View.extend({
 
     render: function(){
         // Render the first few measures.
-        for (var i = 0; i < 20; i++){
+        for (var i = 0; i < 14; i++){
             this.addMeasure();
         }
 
@@ -24,7 +24,7 @@ StaffLine = Backbone.View.extend({
         this.incrementCursor_();
 
         // TODO(dean): Kind of a hack to put this here.
-        this.updateURL();
+        this.updateOuputs_();
     },
 
     pop: function(){
@@ -34,7 +34,7 @@ StaffLine = Backbone.View.extend({
         this.decrementCursor_();
 
         // TODO(dean): Kind of a hack to put this here.
-        this.updateURL();
+        this.updateOuputs_();
     },
 
     advance: function(){
@@ -52,14 +52,16 @@ StaffLine = Backbone.View.extend({
         return templateEl;
     },
 
-    updateURL: function(){
+    updateOuputs_: function(){
         var url = this.toURL();
 
         var input = this.el.querySelector('.url');
         input.value = url;
+
+        this.redrawTweetButton_();
     },
 
-    toURL: function(){
+    toString: function(){
         var lines = [];
         var rows = document.querySelectorAll('.measure');
         Array.prototype.slice.apply(rows).forEach(function(row){
@@ -70,12 +72,27 @@ StaffLine = Backbone.View.extend({
             }, this).join('');
             lines.push(rowInfo);
         }, this);
-        var results = lines.join('|');
+        var results = lines.join('↵');
+        return results;
+    },
+
+    toURL: function(){
+        var markup = this.toString();
 
         // HACK(dean): Strip empty measures.
         var dot = StaffLine.SPACER;
-        results = results.replace(dot + dot + dot + dot + '|', '');
-        return 'http://droneml.com/fly/' + results;
+        markup = markup.replace(dot + dot + dot + dot + '|', '');
+        return 'http://droneml.com/fly/' + markup;
+    },
+
+    redrawTweetButton_: function(){
+        $('.postFlightTwitterButton').remove();
+
+        var template = document.getElementById('twitter-button-tmpl').innerHTML;
+        var postFlightTwitterButton = _.template(template, {
+            tweet: this.toString()
+        });
+        $('.tweetButton').append(postFlightTwitterButton);
     },
 
     getActive_: function(){

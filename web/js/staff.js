@@ -46,9 +46,9 @@ Staff = Backbone.View.extend({
         //also launch a function to calculate the output of all rows.
         //get data from it
         var flightPath = $('form').serialize();
-        
+
         console.log(flightPath);
-       
+
         $('#preFlightTwitterButton').remove();
         this.redrawTweetButton();
         //this.updateTweetText();
@@ -58,7 +58,7 @@ Staff = Backbone.View.extend({
     },
 
     toString: function(newline){
-        newline = newline || '\n'; 
+        newline = newline || '\n';
 
         var lines = [];
         var rows = document.querySelectorAll('.line');
