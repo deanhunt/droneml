@@ -22,6 +22,9 @@ StaffLine = Backbone.View.extend({
         active.innerHTML = this.toCharacter_(command);
 
         this.incrementCursor_();
+
+        // TODO(dean): Kind of a hack to put this here.
+        this.updateURL();
     },
 
     pop: function(){
@@ -29,9 +32,15 @@ StaffLine = Backbone.View.extend({
         active.innerHTML = '';
 
         this.decrementCursor_();
+
+        // TODO(dean): Kind of a hack to put this here.
+        this.updateURL();
     },
 
     advance: function(){
+        var active = this.getActive_();
+        this.padMeasure_(active.parentNode);
+
         this.incrementCursor_(true);
     },
 
@@ -39,8 +48,34 @@ StaffLine = Backbone.View.extend({
         var template = document.getElementById('measure-tmpl').innerHTML;
         var templateEl = $(template)[0];
 
-        this.el.appendChild(templateEl);
+        this.el.querySelector('#measures').appendChild(templateEl);
         return templateEl;
+    },
+
+    updateURL: function(){
+        var url = this.toURL();
+
+        var input = this.el.querySelector('.url');
+        input.value = url;
+    },
+
+    toURL: function(){
+        var lines = [];
+        var rows = document.querySelectorAll('.measure');
+        Array.prototype.slice.apply(rows).forEach(function(row){
+            var inputs = row.querySelectorAll('b');
+            inputs = Array.prototype.slice.apply(inputs);
+            var rowInfo = inputs.map(function(cell){
+                return cell.innerHTML || StaffLine.SPACER;
+            }, this).join('');
+            lines.push(rowInfo);
+        }, this);
+        var results = lines.join('|');
+
+        // HACK(dean): Strip empty measures.
+        var dot = StaffLine.SPACER;
+        results = results.replace(dot + dot + dot + dot + '|', '');
+        return 'http://droneml.com/fly/' + results;
     },
 
     getActive_: function(){
@@ -59,6 +94,20 @@ StaffLine = Backbone.View.extend({
         active.classList.remove('cursor');
 
         evt.target.classList.add('cursor');
+    },
+
+    padMeasure_: function(measure){
+        if (!measure){
+            console.error('Got a bad measure.');
+            return;
+        }
+
+        var inputs = measure.querySelectorAll('b');
+        Array.prototype.slice.apply(inputs).forEach(function(cell){
+            if (!cell.innerHTML.trim()){
+                cell.innerHTML = StaffLine.SPACER;
+            }
+        }, this);
     },
 
     decrementCursor_: function(forcePreviousMeasure){
