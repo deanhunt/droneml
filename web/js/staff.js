@@ -31,8 +31,9 @@ Staff = Backbone.View.extend({
     },
 
     redrawTweetButton: function(){
+        $('.postFlightTwitterButton').remove();
        var tweet = this.toString('↵');
-       var postFlightTwitterButton = "<a href='https://twitter.com/intent/tweet?original_referer=http%3A%2F%2FdroneML.com%2F&text=Check out my new flight path&tw_p=tweetbutton&url=http%3A%2F%2FdroneML.com%2F"+tweet+"&via=arthackday'>Tweet your flight path</a>";
+       var postFlightTwitterButton = "<a class='postFlightTwitterButton' href='https://twitter.com/intent/tweet?original_referer=http%3A%2F%2FdroneML.com%2F&text=Check out my new flight path&tw_p=tweetbutton&url=http%3A%2F%2FdroneML.com%2F"+tweet+"&via=arthackday'>Tweet your flight path</a>";
 //        var tweetButton = '<a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Farthackday.net%2Fgaffta%2F&text='+test+'&tw_p=tweetbutton&url=http%3A%2F%droneML.com%2F&via=arthackday" data-count="vertical" class="twitter-share-button" data-via="arthackday" target="_blank" data-text="▽" data-lang="en">Tweet your flight path</a>';
         $('.tweetButton').append(postFlightTwitterButton);
     },
