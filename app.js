@@ -11,8 +11,8 @@ app.use(express.static(__dirname + '/web'));
 app.set('title', 'DroneML');
 
 app.get('/fly', function(req, res){
-  console.log('Received DroneML:\n', (req.params.droneML));
-  var generatedCode = DroneNotationGenerator.generate(decodeURIComponent(req.params.droneML));
+  console.log('FLY received DroneML:\n', (req.query));
+  var generatedCode = DroneNotationGenerator.generate(decodeURIComponent(req.query.droneML));
   eval(generatedCode);
   console.log('Generated JS:\n', generatedCode);
   res.send("Running DroneML:\n" + "<pre>" + req.params.droneML + "</pre></br>" + "Generated JS:" + generatedCode + "</pre></br>" );
