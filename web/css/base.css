@@ -4,5 +4,12 @@ body {
 
 footer {
     margin: 0 auto;
-    text-align: center
+    text-align: center;
+    color: #aaa;
+    font-weight: bold;
+}
+
+footer a {
+    color: red;
+    text-decoration: none
 }
