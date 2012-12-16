@@ -65,18 +65,32 @@ StaffLine = Backbone.View.extend({
     },
 
     toString: function(){
+        // Killed to renormalize our input around lines.
+        //
+        // var lines = [];
+        // var rows = document.querySelectorAll('.measure');
+        // Array.prototype.slice.apply(rows).forEach(function(row){
+        //     var inputs = row.querySelectorAll('b');
+        //     inputs = Array.prototype.slice.apply(inputs);
+        //     var rowInfo = inputs.map(function(cell){
+        //         return cell.innerHTML || StaffLine.SPACER;
+        //     }, this).join('');
+        //     lines.push(rowInfo);
+        // }, this);
+        // var results = lines.join(StaffLine.LINE_BREAK);
+        // results = results.replace(/(\|·{4})+$/, '');
+        // return results;
+
         var lines = [];
-        var rows = document.querySelectorAll('.measure');
-        Array.prototype.slice.apply(rows).forEach(function(row){
-            var inputs = row.querySelectorAll('b');
-            inputs = Array.prototype.slice.apply(inputs);
-            var rowInfo = inputs.map(function(cell){
+        for (var i = 0, rows, line; i < 4; i++){
+            rows = document.querySelectorAll('.measure');
+            line = Array.prototype.slice.apply(rows).map(function(row){
+                var cell = row.querySelectorAll('b')[i];
                 return cell.innerHTML || StaffLine.SPACER;
             }, this).join('');
-            lines.push(rowInfo);
-        }, this);
+            lines.push(line);
+        }
         var results = lines.join(StaffLine.LINE_BREAK);
-        results = results.replace(/(\|·{4})+$/, '');
         return results;
     },
 
