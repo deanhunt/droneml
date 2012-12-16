@@ -76,6 +76,7 @@ StaffLine = Backbone.View.extend({
             lines.push(rowInfo);
         }, this);
         var results = lines.join(StaffLine.LINE_BREAK);
+        results = results.replace(/(\|·{4})/g, '');
         return results;
     },
 
