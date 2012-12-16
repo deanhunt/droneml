@@ -15,6 +15,18 @@ StaffLine = Backbone.View.extend({
 
         var first = this.el.querySelector('.measure b');
         first.classList.add('cursor');
+
+        if (window.location.hash){
+            var markup = window.location.hash.substring(1);
+            var lines = markup.split(StaffLine.LINE_BREAK);
+            lines.forEach(function(line, y){
+                line.split('').forEach(function(command, x){
+                    var measure = this.el.querySelectorAll('.measure')[x];
+                    var cell = measure.querySelectorAll('b')[y];
+                    cell.innerHTML = command;
+                }, this);
+            }, this);
+        }
     },
 
     push: function(command){
@@ -53,6 +65,8 @@ StaffLine = Backbone.View.extend({
     },
 
     updateOuputs_: function(){
+        window.location.hash = this.toString();
+
         // TODO(dean): Temporarily removed social behavior.
         return;
 
