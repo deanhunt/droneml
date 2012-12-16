@@ -29,11 +29,10 @@ Joystick = Backbone.View.extend({
 
     fly: function(){
         var string = this.staff_.toString();
-        var data = { droneML: encodeURI(string) };
+        var data = { droneML: string };
         console.log('POSTing', data);
 
         jQuery.ajax({
-            type: 'POST',
             url: 'fly',
             data: data,
             success: function(data) {

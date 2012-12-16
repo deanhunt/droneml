@@ -7,20 +7,20 @@ var DroneNotationGenerator = require(__dirname + '/lib/drone-notation/drone-nota
 var drone = arDrone.createClient();
 
 app.use(express.static(__dirname + '/web'));
-app.use(express.bodyParser());
+// app.use(express.bodyParser());
 app.set('title', 'DroneML');
 
-app.post('/fly', function(req, res){
-  console.log('Received DroneML:\n', req.body.droneML);
-  var generatedCode = DroneNotationGenerator.generate(req.body.droneML);
+app.get('/fly', function(req, res){
+  console.log('Received DroneML:\n', (req.params.droneML));
+  var generatedCode = DroneNotationGenerator.generate(decodeURIComponent(req.params.droneML));
   eval(generatedCode);
   console.log('Generated JS:\n', generatedCode);
-  res.send("Running DroneML:\n" + "<pre>" + req.body.droneML + "</pre>");
+  res.send("Running DroneML:\n" + "<pre>" + req.params.droneML + "</pre></br>" + "Generated JS:" + generatedCode + "</pre></br>" );
 });
 
-app.post('/debug', function(req, res){
-  console.log('Received DroneML:\n', req.body.droneML);
-  var generatedCode = DroneNotationGenerator.generate(req.body.droneML);
+app.get('/debug/:droneML', function(req, res){
+  console.log('Received DroneML:\n', req.params.droneML);
+  var generatedCode = DroneNotationGenerator.generate(req.params.droneML);
   console.log('Generated JS:\n', generatedCode);
   res.send("<pre>" + generatedCode + "</pre>");
 });
