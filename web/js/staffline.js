@@ -1,10 +1,15 @@
 StaffLine = Backbone.View.extend({
+
+    // An array of accepted command characters, programmatically generated from
+    // the commands dictionary.
+    validCharacters_: null,
+
     events: {
         'mousedown .measure b' : 'setCursorEvent_'
     },
 
     initialize: function(){
-
+        this.validCharacters_ = _.values(StaffLine.DICTIONARY);
     },
 
     render: function(){
@@ -23,7 +28,8 @@ StaffLine = Backbone.View.extend({
                 line.split('').forEach(function(command, x){
                     var measure = this.el.querySelectorAll('.measure')[x];
                     var cell = measure.querySelectorAll('b')[y];
-                    cell.innerHTML = command;
+                    var isValid = this.validCharacters_.indexOf(command) !== -1;
+                    cell.innerHTML = (isValid) ? command : StaffLine.SPACER;
                 }, this);
             }, this);
         }
@@ -41,7 +47,7 @@ StaffLine = Backbone.View.extend({
 
     pop: function(){
         var active = this.getActive_();
-        active.innerHTML = '';
+        active.innerHTML = StaffLine.SPACER;
 
         this.decrementCursor_();
 
@@ -213,5 +219,6 @@ StaffLine.DICTIONARY = {
     "left": "←",
     "right": "→",
     "clockwise": "↻",
-    "counterclockwise": "↺"
+    "counterclockwise": "↺",
+    "waits": StaffLine.SPACER
 };
