@@ -41,12 +41,6 @@ Joystick = Backbone.View.extend({
             },
             dataType: 'json'
         });
-
-        // jQuery.post('debug/', {
-        //     code: string
-        // }, function(result){
-        //     console.log('success!');
-        // });
     },
 
     addEvent_: function(evt){

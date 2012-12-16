@@ -2,6 +2,7 @@
     font-size: 36pt;
     -webkit-user-select: none;
     text-align: center;
+    margin: 20px 0;
 }
 
 // HACK(dean): Temporarily removing our social strategy.
@@ -34,8 +35,21 @@
     display: block;
     height: 1em;
     width: 1em;
-    border-bottom: 2px solid #eee
+    position: relative;
+    border-bottom: 2px solid #aaa;
 }
+
+/*
+.measure b:after {
+    content: '';
+    position: absolute;
+    top: -42%;
+    left: 0;
+    width: 1em;
+    height: 1em;
+    z-index: -1;
+}
+*/
 
 .measure b.cursor {
     background-color: red;
